@@ -27,14 +27,25 @@ For releases without Hawtio, this paramter can be omitted and defaults to ```api
 
 ## Installation
 
-1. Navigate to the folder where your nagios plugins are stored e.g.:
- - ```cd /usr/lib/nagios/plugins/```
-- Download the plugin script:
- - ```wget https://raw.githubusercontent.com/predic8/activemq-nagios-plugin/master/check_activemq.py```
-- Install nagiosplugin for Python:
- - ```pip install nagiosplugin``` (systemwide, execute as root) or
- - ```pip install --user nagiosplugin``` (for the current user)
-
+1. Clone this repo:
+   ```sh
+   git clone https://github.com/predic8/activemq-nagios-plugin
+   ```
+1. Decide where you want to install it, e.g. `/usr/lib/nagios/plugins/`:
+   ```sh
+   NAGIOS_PLUGINS=/usr/lib/nagios/plugins/
+   ```
+1. Install check_activemq into a virtualenv:
+   ```sh
+   $ python -mvirtualenv $NAGIOS_PLUGINS/check_activemq
+   $ $NAGIOS_PLUGINS/check_activemq/bin/pip install .
+   ```
+1. Configure Nagios to use your plugin at:
+   ```sh
+   $ $NAGIOS_PLUGINS/check_activemq/bin/check_activemq.py --help
+   usage: check_activemq.py [-h] [-v] [--host HOST] [--port PORT] [-b BROKERNAME]
+   […]
+   ```
 
 ## Command line options:
 - Run ```./check_activemq.py -h``` to see the full (and up to date) help
